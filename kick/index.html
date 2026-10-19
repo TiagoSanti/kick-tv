@@ -61,7 +61,7 @@
           e.preventDefault();startPlayback(input.value);return;
         }
       }
-      if(key==='Escape'||key==='Backspace'||key==='BrowserBack'||code===10009||code===461){if(!watchView.classList.contains('hidden')){e.preventDefault();showHome('Selecione outro canal ou tente novamente.',false);}return;}
+      if(key==='Escape'||key==='Backspace'||key==='BrowserBack'||code===10009||code===461){if(!watchView.classList.contains('hidden')){e.preventDefault();showHome('',false);}return;}
       if(!watchView.classList.contains('hidden')&&(key==='MediaPlay'||key==='Enter'||code===415)){e.preventDefault();video.muted=false;var p=video.play();if(p&&p.catch)p.catch(function(){});}
     });
     try{var last=localStorage.getItem('kick-tv.last-channel');if(last&&/^[a-zA-Z0-9_]{1,30}$/.test(last))channel=last;}catch(ignore){}
