@@ -42,10 +42,10 @@
       channel=normalized;input.value=channel;try{localStorage.setItem('kick-tv.last-channel',channel);}catch(ignore){}
       var thisRequest=++requestId;setMessage('Conectando à transmissão…',false);
       fetch('https://kick.com/api/v2/channels/'+encodeURIComponent(channel)+'/livestream',{method:'GET',cache:'no-store',credentials:'omit'})
-        .then(function(r){if(!r.ok)throw new Error('A Kick respondeu HTTP '+r.status+'.');return r.json();})
+        .then(function(r){if(r.status===404)throw new Error('Canal “'+channel+'” não encontrado. Confira o nome e tente novamente.');if(!r.ok)throw new Error('Não foi possível consultar a Kick (HTTP '+r.status+').');return r.json();})
         .then(function(json){
           if(thisRequest!==requestId)return;
-          var data=json&&json.data;if(!data||!data.playback_url)throw new Error('Canal offline ou sem transmissão disponível.');
+          var data=json&&json.data;if(!data||!data.playback_url)throw new Error('O canal “'+channel+'” está offline no momento.');
           var u=new URL(data.playback_url);if(u.protocol!=='https:'||!u.pathname.toLowerCase().endsWith('.m3u8'))throw new Error('A Kick retornou um fluxo incompatível.');
           welcome.classList.add('hidden');watchView.classList.remove('hidden');
           video.muted=false;video.defaultMuted=false;video.src=u.href;video.load();
