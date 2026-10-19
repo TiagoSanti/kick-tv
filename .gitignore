@@ -1,0 +1,35 @@
+# Tizen Studio workspace and generated build output
+.metadata/
+.buildResult/
+**/.buildResult/
+build/
+dist/
+
+# Old local playback diagnostic project
+/Autoplay Diagnostic/
+
+# IDE-local settings and generated signing material
+**/.settings/
+**/.sign/
+**/.manifest.tmp
+**/author-signature.xml
+**/signature1.xml
+profiles.xml
+
+# Installable packages are built and signed per developer certificate
+*.wgt
+*.tpk
+*.tmg
+
+# Certificates and private keys
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.pem
+*.key
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
